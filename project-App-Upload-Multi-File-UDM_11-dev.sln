@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project-App-Upload-Multi-File-UDM_11-dev", "project-App-Upload-Multi-File-UDM_11-dev", "{7D514560-B33B-EF90-DC2B-7A059CF951A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code", "Code", "{8252AEBE-219E-B70C-6628-A9E48466763C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadClient", "project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadClient\FileUploadClient.csproj", "{024BFFE2-3572-97AB-A55B-8A4322CB8616}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadServer", "project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\FileUploadServer.csproj", "{B74A0E83-6AA1-FD8E-BE7E-B0C06DC920CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{024BFFE2-3572-97AB-A55B-8A4322CB8616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024BFFE2-3572-97AB-A55B-8A4322CB8616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024BFFE2-3572-97AB-A55B-8A4322CB8616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024BFFE2-3572-97AB-A55B-8A4322CB8616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74A0E83-6AA1-FD8E-BE7E-B0C06DC920CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74A0E83-6AA1-FD8E-BE7E-B0C06DC920CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74A0E83-6AA1-FD8E-BE7E-B0C06DC920CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74A0E83-6AA1-FD8E-BE7E-B0C06DC920CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8252AEBE-219E-B70C-6628-A9E48466763C} = {7D514560-B33B-EF90-DC2B-7A059CF951A5}
+		{024BFFE2-3572-97AB-A55B-8A4322CB8616} = {8252AEBE-219E-B70C-6628-A9E48466763C}
+		{B74A0E83-6AA1-FD8E-BE7E-B0C06DC920CD} = {8252AEBE-219E-B70C-6628-A9E48466763C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF0B02BC-314C-4432-82E4-DD336B1496DC}
+	EndGlobalSection
+EndGlobal
