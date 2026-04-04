@@ -1,5 +1,8 @@
 using System.Drawing;
+using System.Net.Quic;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
+using FileUploadClient.Networking;
 
 namespace GUI;
 
@@ -8,11 +11,13 @@ public partial class Form1 : Form
     private ListView listView;
     private Button btnSelect;
     private Button btnUpload;
+    private ClientConnection _connection;
 
     public Form1()
     {
         InitializeComponent();
         InitUI();
+        _connection = new ClientConnection("127.0.0.1", 9000);
     }
 
     private void InitUI()
@@ -91,9 +96,15 @@ public partial class Form1 : Form
         }
     }
 
-    private void BtnUpload_Click(object sender, EventArgs e)
+    private async void BtnUpload_Click(object sender, EventArgs e)
     {
-        MessageBox.Show("WIP");
+        if (!_connection.IsConnected)
+        {
+            await _connection.ConnectAsync();
+        }
+
+    var controller = new UploadController(_connection, listView);
+    await controller.StartUploadAllAsync();
     }
 }
 
