@@ -43,7 +43,7 @@ namespace GUI
         }
 
         // ── Upload 1 file ──
-        private async Task UploadOneFileAsync(ListViewItem item)
+        private async Task UploadOneFileAsync(ListViewItem item, NetworkStream stream)
         {
             string filePath = item.Tag as string ?? "";
 
