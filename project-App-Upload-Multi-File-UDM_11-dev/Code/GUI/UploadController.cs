@@ -23,12 +23,23 @@ namespace GUI
 
         // ── Upload toàn bộ file trong ListView ──
         public async Task StartUploadAllAsync()
-        {
-            foreach (ListViewItem item in _listView.Items)
-            {
-                if (item.SubItems[3].Text == "Done") continue;
-                await UploadOneFileAsync(item);
-            }
+        {    // Lấy Stream 1 lần duy nhất cho toàn bộ phiên upload
+            NetworkStream stream = _connection.GetStream();
+            // Gưi đếm 1 lần duy nhất
+            var pendingItems = _listView.Items
+            .Cast<ListViewItem>()
+            .Where(i => i.SubItems[3].Text != "Done")
+            .ToList();
+
+            if (pendingItems.Count == 0) return;
+            using var writer = new BinaryWriter(stream,
+            System.Text.Encoding.UTF8, leaveOpen: true);
+            writer.Write(pendingItems.Count);
+            writer.Flush();
+            // Truyền stream xuống và không tạo lại
+            foreach (var item in pendingItems)
+                await UploadOneFileAsync(item, stream);
+
         }
 
         // ── Upload 1 file ──
