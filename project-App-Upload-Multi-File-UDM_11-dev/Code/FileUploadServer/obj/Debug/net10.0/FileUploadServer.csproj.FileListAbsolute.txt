@@ -26,3 +26,18 @@ C:\project-App-Upload-Multi-File-UDM_11-dev\project-App-Upload-Multi-File-UDM_11
 C:\project-App-Upload-Multi-File-UDM_11-dev\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.pdb
 C:\project-App-Upload-Multi-File-UDM_11-dev\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.genruntimeconfig.cache
 C:\project-App-Upload-Multi-File-UDM_11-dev\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\ref\FileUploadServer.dll
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\bin\Debug\net10.0\FileUploadServer.exe
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\bin\Debug\net10.0\FileUploadServer.deps.json
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\bin\Debug\net10.0\FileUploadServer.runtimeconfig.json
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\bin\Debug\net10.0\FileUploadServer.dll
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\bin\Debug\net10.0\FileUploadServer.pdb
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.AssemblyInfoInputs.cache
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.AssemblyInfo.cs
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.csproj.CoreCompileInputs.cache
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.sourcelink.json
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.dll
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\refint\FileUploadServer.dll
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.pdb
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\FileUploadServer.genruntimeconfig.cache
+C:\Users\PC\OneDrive\Máy tính\myproject\New folder\project-App-Upload-Multi-File-UDM_11\project-App-Upload-Multi-File-UDM_11-dev\Code\FileUploadServer\obj\Debug\net10.0\ref\FileUploadServer.dll

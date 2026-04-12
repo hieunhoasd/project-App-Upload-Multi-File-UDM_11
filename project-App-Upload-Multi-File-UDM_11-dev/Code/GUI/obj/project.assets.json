@@ -1,42 +1,67 @@
 {
   "version": 3,
   "targets": {
-    "net10.0-windows7.0": {}
+    "net10.0-windows7.0": {
+      "FileUploadClient/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/FileUploadClient.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FileUploadClient.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "FileUploadClient/1.0.0": {
+      "type": "project",
+      "path": "../FileUploadClient/FileUploadClient.csproj",
+      "msbuildProject": "../FileUploadClient/FileUploadClient.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0-windows7.0": []
+    "net10.0-windows7.0": [
+      "FileUploadClient >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Proj\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\GUI\\GUI.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\GUI\\GUI.csproj",
       "projectName": "GUI",
-      "projectPath": "D:\\Proj\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\GUI\\GUI.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Proj\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\GUI\\obj\\",
+      "projectPath": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\GUI\\GUI.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\GUI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0-windows"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0-windows7.0": {
           "targetAlias": "net10.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj": {
+              "projectPath": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

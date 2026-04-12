@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\project-App-Upload-Multi-File-UDM_11-dev\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj": {}
+    "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj": {}
   },
   "projects": {
-    "C:\\project-App-Upload-Multi-File-UDM_11-dev\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj": {
+    "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\project-App-Upload-Multi-File-UDM_11-dev\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj",
         "projectName": "FileUploadClient",
-        "projectPath": "C:\\project-App-Upload-Multi-File-UDM_11-dev\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj",
-        "packagesPath": "C:\\Users\\HIEU\\.nuget\\packages\\",
-        "outputPath": "C:\\project-App-Upload-Multi-File-UDM_11-dev\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\obj\\",
+        "projectPath": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\FileUploadClient.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\OneDrive\\Máy tính\\myproject\\New folder\\project-App-Upload-Multi-File-UDM_11\\project-App-Upload-Multi-File-UDM_11-dev\\Code\\FileUploadClient\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\HIEU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
