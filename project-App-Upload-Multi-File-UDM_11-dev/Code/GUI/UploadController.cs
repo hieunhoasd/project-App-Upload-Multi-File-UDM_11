@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace GUI
         private readonly ClientConnection _connection;
         private readonly ListView _listView;
 
-        private const int ChunkSize = 4096; // 4KB mỗi chunk (theo giai đoạn 2)
+        private const int ChunkSize = 65536;           // 64KB - tốt cho tốc độ
+        private const int MinUpdateIntervalMs = 120;   // Chỉ update UI mỗi 120ms → mượt mà
 
         public UploadController(ClientConnection connection, ListView listView)
         {
@@ -21,44 +23,40 @@ namespace GUI
             _listView = listView;
         }
 
-        // ── Upload toàn bộ file trong ListView ──
         public async Task StartUploadAllAsync()
-        {    // Lấy Stream 1 lần duy nhất cho toàn bộ phiên upload
+        {
             NetworkStream stream = _connection.GetStream();
-            // Gưi đếm 1 lần duy nhất
+
             var pendingItems = _listView.Items
-            .Cast<ListViewItem>()
-            .Where(i => i.SubItems[3].Text != "Done")
-            .ToList();
+                .Cast<ListViewItem>()
+                .Where(i => i.SubItems[3].Text != "Done" && i.SubItems[3].Text != "Error")
+                .ToList();
 
             if (pendingItems.Count == 0) return;
-            using var writer = new BinaryWriter(stream,
-            System.Text.Encoding.UTF8, leaveOpen: true);
+
+            // Gửi số lượng file
+            using var writer = new BinaryWriter(stream, System.Text.Encoding.UTF8, leaveOpen: true);
             writer.Write(pendingItems.Count);
             writer.Flush();
-            // Truyền stream xuống và không tạo lại
-            foreach (var item in pendingItems)
-                await UploadOneFileAsync(item, stream);
 
+            foreach (var item in pendingItems)
+            {
+                await UploadOneFileAsync(item, stream);
+            }
         }
 
-        // ── Upload 1 file ──
         private async Task UploadOneFileAsync(ListViewItem item, NetworkStream stream)
         {
-            string filePath = item.Tag as string ?? "";
-
+            string filePath = item.Tag?.ToString() ?? "";
             if (!File.Exists(filePath))
             {
                 UpdateStatus(item, "Error");
-                MessageBox.Show($"Không tìm thấy file: {filePath}");
                 return;
             }
 
             try
             {
                 UpdateStatus(item, "Uploading");
-
-                NetworkStream stream = _connection.GetStream();
 
                 var metadata = new FileMetadata
                 {
@@ -67,7 +65,8 @@ namespace GUI
                 };
 
                 ProtocolEncoder.EncodeMetadata(stream, metadata);
-                await SendFileChunksAsync(stream, item, filePath, metadata.FileSize);
+
+                await SendFileWithProgressAsync(stream, item, filePath, metadata.FileSize);
 
                 UpdateStatus(item, "Done");
                 UpdateProgress(item, 100);
@@ -75,49 +74,60 @@ namespace GUI
             catch (Exception ex)
             {
                 UpdateStatus(item, "Error");
-                MessageBox.Show($"Lỗi upload: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi upload {Path.GetFileName(filePath)}: {ex.Message}");
             }
         }
 
-        // ── Gửi chunk + cập nhật Progress ──
-        private async Task SendFileChunksAsync(NetworkStream stream, ListViewItem item,
+        private async Task SendFileWithProgressAsync(NetworkStream stream, ListViewItem item,
             string filePath, long fileSize)
         {
-            using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, ChunkSize, true);
 
             byte[] buffer = new byte[ChunkSize];
             long totalSent = 0;
+            DateTime lastUpdateTime = DateTime.UtcNow;
+            var stopwatch = Stopwatch.StartNew();
+            long lastBytesSent = 0;
+
             int bytesRead;
-
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            long lastBytes = 0;
-
-            while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            while ((bytesRead = await fs.ReadAsync(buffer, 0, buffer.Length)) > 0)
             {
                 await stream.WriteAsync(buffer, 0, bytesRead);
                 totalSent += bytesRead;
 
-                double progress = fileSize > 0 ? (double)totalSent / fileSize * 100 : 0;
-                UpdateProgress(item, progress);
-
-                if (stopwatch.ElapsedMilliseconds >= 500)
+                // === THROTTLING + SMOOTH UI ===
+                if ((DateTime.UtcNow - lastUpdateTime).TotalMilliseconds >= MinUpdateIntervalMs)
                 {
-                    long bytesDelta = totalSent - lastBytes;
-                    double speed = bytesDelta / (stopwatch.ElapsedMilliseconds / 1000.0);
-                    UpdateSpeed(item, speed);
-                    lastBytes = totalSent;
-                    stopwatch.Restart();
+                    double progress = fileSize > 0 ? (double)totalSent / fileSize * 100 : 0;
+                    progress = Math.Min(100.0, Math.Max(0.0, progress)); // Không vượt 100%
+
+                    UpdateProgress(item, progress);
+
+                    // Tính tốc độ
+                    double seconds = stopwatch.Elapsed.TotalSeconds;
+                    if (seconds > 0.8)
+                    {
+                        double speedKBps = (totalSent - lastBytesSent) / 1024.0 / seconds;
+                        UpdateSpeed(item, speedKBps);
+                        lastBytesSent = totalSent;
+                        stopwatch.Restart();
+                    }
+
+                    lastUpdateTime = DateTime.UtcNow;
                 }
             }
+
+            // Update lần cuối
+            UpdateProgress(item, 100);
         }
 
         private void UpdateProgress(ListViewItem item, double progress)
         {
+            string text = $"{progress:F1}%";
             if (_listView.InvokeRequired)
-                _listView.Invoke(() => item.SubItems[2].Text = $"{progress:F1}%");
+                _listView.Invoke(() => item.SubItems[2].Text = text);
             else
-                item.SubItems[2].Text = $"{progress:F1}%";
+                item.SubItems[2].Text = text;
         }
 
         private void UpdateStatus(ListViewItem item, string status)
@@ -128,12 +138,16 @@ namespace GUI
                 item.SubItems[3].Text = status;
         }
 
-        private void UpdateSpeed(ListViewItem item, double speed)
+        private void UpdateSpeed(ListViewItem item, double speedKBps)
         {
-            string speedText = speed < 1024 * 1024
-                ? $"{speed / 1024:F1} KB/s"
-                : $"{speed / (1024 * 1024):F1} MB/s";
-            Console.WriteLine($"[{item.SubItems[0].Text}] Speed: {speedText}");
+            string speedText = speedKBps >= 1024
+                ? $"{(speedKBps / 1024):F1} MB/s"
+                : $"{speedKBps:F1} KB/s";
+
+            if (_listView.InvokeRequired)
+                _listView.Invoke(() => item.SubItems[3].Text = speedText);   // Cột Speed là SubItems[3]
+            else
+                item.SubItems[3].Text = speedText;
         }
     }
-}
+}   

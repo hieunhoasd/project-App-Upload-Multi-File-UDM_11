@@ -12,9 +12,10 @@ namespace FileUploadClient
         // Phải đổi thành async Task Main vì ClientConnection của bạn dùng async
         static async Task Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
             // 1. GIÁM ĐỐC GỌI THỦ KHO (Lên danh sách hàng)
             UploadDataModel uploadList = new UploadDataModel();
-            uploadList.AddFile(new UploadFile { FilePath = @"C:\Users\HIEU\OneDrive\Hình ảnh\anh_1.jpg.png" });//đường link ảnh trong máy để test
 
             // 2. GIÁM ĐỐC GỌI TÀI XẾ (Khởi động xe, kết nối mạng)
             ClientConnection connection = new ClientConnection("127.0.0.1", 9000);

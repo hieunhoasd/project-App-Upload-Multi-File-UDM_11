@@ -10,7 +10,10 @@ namespace FileUploadServer
     class ProgramSV
     {
         static void Main(string[] args)
+
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
             // ─── 1. TẠO SERVER ───
             // Tạo server TCP gắn với tất cả IP của máy, dùng port 9000
             TcpListener server = new TcpListener(IPAddress.Any, 9000);
