@@ -6,7 +6,7 @@ namespace FileUploadClient.Models
     // Tạo model UploadFile
     public class UploadFile
     {
-        public string FilePath { get; set; }
+        public string? FilePath { get; set; }
         public string FileName => Path.GetFileName(FilePath);
         public long FileSize => new FileInfo(FilePath).Length;
     }

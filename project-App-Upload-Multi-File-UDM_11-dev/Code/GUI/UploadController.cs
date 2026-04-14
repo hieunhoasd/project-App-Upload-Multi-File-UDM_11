@@ -15,7 +15,7 @@ namespace GUI
         private readonly ListView _listView;
 
         private const int ChunkSize = 65536;           // 64KB - tốt cho tốc độ
-        private const int MinUpdateIntervalMs = 120;   // Chỉ update UI mỗi 120ms → mượt mà
+        private const int MinUpdateIntervalMs = 120;   // Chỉ update UI mỗi 120ms 
 
         public UploadController(ClientConnection connection, ListView listView)
         {

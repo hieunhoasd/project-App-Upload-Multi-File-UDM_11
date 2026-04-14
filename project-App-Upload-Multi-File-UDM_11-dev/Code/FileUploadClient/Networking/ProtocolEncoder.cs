@@ -2,7 +2,6 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using FileUploadClient.Models;
-using FileUploadClient.Models;
 namespace FileUploadClient.Networking
 {
     public static class ProtocolEncoder

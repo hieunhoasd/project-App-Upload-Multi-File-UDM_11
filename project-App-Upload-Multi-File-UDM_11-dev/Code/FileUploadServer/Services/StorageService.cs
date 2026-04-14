@@ -7,40 +7,60 @@ namespace FileUploadServer.Services
     {
         public void SaveFile(Stream stream, FileMetadata metadata)
         {
-            // Tạo thư mục lưu trữ nếu chưa tồn tại
             string uploadFolder = "Uploads";
             if (!Directory.Exists(uploadFolder))
             {
                 Directory.CreateDirectory(uploadFolder);
             }
 
-            string fileNameOnly = Path.GetFileNameWithoutExtension(metadata.FileName);
-            string extension = Path.GetExtension(metadata.FileName);
-            string filePath = Path.Combine("Uploads", metadata.FileName);
-            int count = 1;
+            string fullFolderPath = Path.GetFullPath(uploadFolder);
+            Console.WriteLine($"[Storage] Thư mục Uploads: {fullFolderPath}");
 
-            // Vòng lặp kiểm tra trùng tên
+            string filePath = Path.Combine(uploadFolder, metadata.FileName);
+            string baseName = Path.GetFileNameWithoutExtension(metadata.FileName) ?? "Unknown";
+            string extension = Path.GetExtension(metadata.FileName) ?? "";
+
+            int count = 1;
             while (File.Exists(filePath))
             {
-                // Vòng lặp kiểm tra nếu trùng thì tạo tên mới và đánh số: TenFile (1).txt...
-                string newFileName = $"{fileNameOnly} ({count++}){extension}";
-                filePath = Path.Combine("Uploads", newFileName);
+                string newName = $"{baseName} ({count++}){extension}";
+                filePath = Path.Combine(uploadFolder, newName);
             }
 
-            // Đưa dữ liệu file vào thư mục đã tạo
-            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            Console.WriteLine($"[Storage] Đang lưu: {Path.GetFileName(filePath)}");
+
+            try
             {
-                byte[] buffer = new byte[65536];
-                long totalRead = 0;
-                int bytesRead;
-
-                while (totalRead < metadata.FileSize && (bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
-                    fs.Write(buffer, 0, bytesRead);
-                    totalRead += bytesRead;
+                    byte[] buffer = new byte[65536];
+                    long totalRead = 0;
+                    int bytesRead;
+
+                    // Đọc đúng số byte theo FileSize
+                    while (totalRead < metadata.FileSize)
+                    {
+                        int toRead = (int)Math.Min(buffer.Length, metadata.FileSize - totalRead);
+                        bytesRead = stream.Read(buffer, 0, toRead);
+
+                        if (bytesRead == 0)
+                        {
+                            Console.WriteLine("[Storage] Cảnh báo: Client ngắt kết nối giữa chừng");
+                            break;
+                        }
+
+                        fs.Write(buffer, 0, bytesRead);
+                        totalRead += bytesRead;
+                    }
                 }
+
+                long savedSize = new FileInfo(filePath).Length;
+                Console.WriteLine($"[Storage] ✓ ĐÃ LƯU XONG: {Path.GetFileName(filePath)} ({savedSize} bytes)");
             }
-            Console.WriteLine($"[Storage] Đã lưu xong file tại: {filePath}");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Storage] LỖI lưu file: {ex.Message}");
+            }
         }
     }
 }
